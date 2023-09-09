@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="model_gazebo" type="planning2.py" name="move_group_python_interface_tutorial" output="screen">
+
+    </node>
+</launch>

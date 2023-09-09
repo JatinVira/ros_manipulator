@@ -1,0 +1,1 @@
+gz sdf -p model.urdf > model.sdf
