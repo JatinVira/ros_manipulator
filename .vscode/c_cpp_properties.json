@@ -1,0 +1,41 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/jatinvira/free_ws/devel/include/**",
+        "/home/jatinvira/catkin_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/jatinvira/catkin_ws/src/100-Days-of-Ros/day_06/include/**",
+        "/home/jatinvira/catkin_ws/src/100-Days-of-Ros/day_29/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/diff_drive_controller/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/effort_controllers/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/force_torque_sensor_controller/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/forward_command_controller/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/four_wheel_steering_controller/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/gripper_action_controller/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/imu_sensor_controller/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/joint_state_controller/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/joint_trajectory_controller/include/**",
+        "/home/jatinvira/catkin_ws/src/miko_pkg/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/position_controllers/include/**",
+        "/home/jatinvira/catkin_ws/src/rosserial/rosserial_server/include/**",
+        "/home/jatinvira/catkin_ws/src/rosserial/rosserial_test/include/**",
+        "/home/jatinvira/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/include/**",
+        "/home/jatinvira/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/universal_robot/ur_kinematics/include/**",
+        "/home/jatinvira/free_ws/src/ros_manipulator/shadow_robot_smart_grasping_sandbox/ros_controllers/velocity_controllers/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
