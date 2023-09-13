@@ -1,8 +1,0 @@
-moveit_setup_assistant_config:
-  URDF:
-    package: shadow_tc
-    relative_path: urdf/model.urdf
-  SRDF:
-    relative_path: config/ur10.srdf
-  CONFIG:
-    generated_timestamp: 1480683875

@@ -1,5 +1,0 @@
-<launch>
-    <node pkg="demo_moveit_config" type="planning2.py" name="move_group_python_interface_tutorial" output="screen">
-        
-    </node>
-</launch>
