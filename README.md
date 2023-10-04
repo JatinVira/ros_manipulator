@@ -42,3 +42,26 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
     catkin build fg_gazebo_example
     source ~/.bashrc
     ```
+
+## Usage
+
+1. Launch the Gazebo simulation:
+
+    ```bash
+    roslaunch fg_gazebo_example fg_gazebo_example.launch
+    ```
+
+2. Run the script to control the robot:
+
+    ```bash
+    rosrun fg_gazebo_example move_viewpoints.py
+    ```
+
+## References
+
+1. [Foxglove Studio](https://foxglove.dev/blog/simulating-robotic-scenarios-with-ros1-and-gazebo)
+2. [ROS Control](http://wiki.ros.org/ros_control)
+3. [ROS Controllers](http://wiki.ros.org/ros_controllers)
+4. [MoveIt!](https://moveit.ros.org/)
+5. [MoveIt! Tutorials](https://ros-planning.github.io/moveit_tutorials/)
+6. [MoveIt! Tutorials - Move Group Python Interface](https://ros-planning.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html)
