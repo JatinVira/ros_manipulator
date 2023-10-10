@@ -43,6 +43,13 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
     source ~/.bashrc
     ```
 
+7. Generating Simulation Models:
+
+    ```bash
+    cd ~/catkin_ws/src/ros_manipulator/fg_gazebo_example/
+    python3 scripts/create_sdf_and_config.py
+    ```
+
 ## Usage
 
 1. Launch the Gazebo simulation:
