@@ -26,9 +26,8 @@
   <node name="spawn_foxglove_box" pkg="gazebo_ros" type="spawn_model"
     args="-model foxglove_box -urdf -f $(find fg_gazebo_example)/urdf/foxglove_box.urdf -y 1 -z 0.2 -Y -1.56" />
 
-  <!-- Spawn a simple box of unit side in gazebo -->
-  <node name="spawn_box_simple" pkg="gazebo_ros" type="spawn_model"
-    args="-file $(find fg_gazebo_example)/models/simple_cube/simple_cube.sdf -sdf -model my_cube -x 5.0 -y 5.0 -z 5.0" />
+  <!-- Spawn the boxes -->
+  <include file="$(find fg_gazebo_example)/launch/spawn_boxes.launch" />
 
   <!-- Foxglove bridge -->
   <include file="$(find foxglove_bridge)/launch/foxglove_bridge.launch" />
