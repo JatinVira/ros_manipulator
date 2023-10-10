@@ -1,8 +1,62 @@
 <?xml version="1.0"?>
 <launch>
 
+    <!-- Parameters for Blue box coordinates -->
+    <arg name="blue_box_x" default="1.0" />
+    <arg name="blue_box_y" default="1.0" />
+    <arg name="blue_box_z" default="1.0" />
+
+    <!-- Parameters for Gray box coordinates -->
+    <arg name="gray_box_x" default="1.2" />
+    <arg name="gray_box_y" default="1.2" />
+    <arg name="gray_box_z" default="1.0" />
+
+    <!-- Parameters for Green box coordinates -->
+    <arg name="green_box_x" default="1.4" />
+    <arg name="green_box_y" default="1.4" />
+    <arg name="green_box_z" default="1.0" />
+
+    <!-- Parameters for Peach box coordinates -->
+    <arg name="peach_box_x" default="1.5" />
+    <arg name="peach_box_y" default="1.5" />
+    <arg name="peach_box_z" default="1.0" />
+
+    <!-- Parameters for Pink box coordinates -->
+    <arg name="pink_box_x" default="1.6" />
+    <arg name="pink_box_y" default="1.6" />
+    <arg name="pink_box_z" default="1.0" />
+
+    <!-- Parameters for Yellow box coordinates -->
+    <arg name="yellow_box_x" default="1.7" />
+    <arg name="yellow_box_y" default="1.7" />
+    <arg name="yellow_box_z" default="1.0" />
+
     <!-- Spawn a simple box of unit side in gazebo -->
     <node name="spawn_box_simple" pkg="gazebo_ros" type="spawn_model"
         args="-file $(find fg_gazebo_example)/models/simple_cube/simple_cube.sdf -sdf -model my_cube -x 5.0 -y 5.0 -z 5.0" />
+
+    <!-- Spawn a blue box with blue box spawn coordinates -->
+    <node name="spawn_box_blue" pkg="gazebo_ros" type="spawn_model"
+        args="-file $(find fg_gazebo_example)/models/blue/blue_cube.sdf -sdf -model blue_box -x $(arg blue_box_x) -y $(arg blue_box_y) -z $(arg blue_box_z)" />
+
+    <!-- Spawn a gray box with gray box spawn coordinates -->
+    <node name="spawn_box_gray" pkg="gazebo_ros" type="spawn_model"
+        args="-file $(find fg_gazebo_example)/models/gray/gray_cube.sdf -sdf -model gray_box -x $(arg gray_box_x) -y $(arg gray_box_y) -z $(arg gray_box_z)" />
+
+    <!-- Spawn a green box with green box spawn coordinates -->
+    <node name="spawn_box_green" pkg="gazebo_ros" type="spawn_model"
+        args="-file $(find fg_gazebo_example)/models/green/green_cube.sdf -sdf -model green_box -x $(arg green_box_x) -y $(arg green_box_y) -z $(arg green_box_z)" />
+
+    <!-- Spawn a peach box with peach box spawn coordinates -->
+    <node name="spawn_box_peach" pkg="gazebo_ros" type="spawn_model"
+        args="-file $(find fg_gazebo_example)/models/peach/peach_cube.sdf -sdf -model peach_box -x $(arg peach_box_x) -y $(arg peach_box_y) -z $(arg peach_box_z)" />
+
+    <!-- Spawn a pink box with pink box spawn coordinates -->
+    <node name="spawn_box_pink" pkg="gazebo_ros" type="spawn_model"
+        args="-file $(find fg_gazebo_example)/models/pink/pink_cube.sdf -sdf -model pink_box -x $(arg pink_box_x) -y $(arg pink_box_y) -z $(arg pink_box_z)" />
+
+    <!-- Spawn a yellow box with yellow box spawn coordinates -->
+    <node name="spawn_box_yellow" pkg="gazebo_ros" type="spawn_model"
+        args="-file $(find fg_gazebo_example)/models/yellow/yellow_cube.sdf -sdf -model yellow_box -x $(arg yellow_box_x) -y $(arg yellow_box_y) -z $(arg yellow_box_z)" />
 
 </launch>
