@@ -48,7 +48,7 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
 1. Launch the Gazebo simulation:
 
     ```bash
-    roslaunch fg_gazebo_example fg_gazebo_example.launch
+    roslaunch fg_gazebo_example simulation.launch
     ```
 
 2. Run the script to control the robot:
