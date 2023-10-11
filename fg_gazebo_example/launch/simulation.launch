@@ -11,7 +11,7 @@
     <arg name="sim" value="true" />
   </include>
 
-  <!-- Spawn a static camera, not part of the robot's URDF -->
+  <!-- Spawn a static camera, not part of the robot's URDF
   <include file="$(find fg_gazebo_example)/launch/include/spawn_static_camera.launch">
     <arg name="camera_name" value="static_camera" />
     <arg name="x" value="1.0" />
@@ -20,7 +20,22 @@
     <arg name="roll" value="0.0" />
     <arg name="pitch" value="0.65" />
     <arg name="yaw" value="3.1416" />
+  </include> -->
+
+  <!-- Spawn a static camera, not part of URDF -->
+  <include file="$(find fg_gazebo_example)/launch/include/spawn_static_camera.launch">
+    <arg name="camera_name" value="static_camera" />
+    <arg name="x" value="0.5" />
+    <arg name="y" value="0.5" />
+    <arg name="z" value="1.5" />
+    <arg name="roll" value="1.57" />
+    <arg name="pitch" value="1.57" />
+    <arg name="yaw" value="1.57" />
   </include>
+
+  <!-- What is pi/2 -->
+  <arg name="pi/2" default="1.57079632679" />
+
 
   <!-- Spawn a simple box with Foxglove logo -->
   <node name="spawn_foxglove_box" pkg="gazebo_ros" type="spawn_model"
