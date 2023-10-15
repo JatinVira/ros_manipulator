@@ -79,7 +79,7 @@ position = [0.5, 0.5, 1.5]
 orientation = [0.0, -1.57, 0.0]
 
 # Ground Truth Object Pose brokken down into position and orientation
-ground_truth_pose_position = [-0.5, 0.5, 0.15]
+ground_truth_pose_position = [0.5, 0.5, 0.15]
 ground_truth_pose_orientation = [0.0, 0.0, 0.0]
 ground_truth_pose = np.array(
     ground_truth_pose_position + ground_truth_pose_orientation
@@ -100,6 +100,9 @@ vector_world = np.dot(M, vector_camera)
 
 # Hardcode the z obtained for the vector_world
 vector_world[2] = 0.15
+
+# Multiply by -1 to x for vector_world
+vector_world[0] = -1 * vector_world[0]
 
 # Print given values
 print("Camera Intrinsics:")
