@@ -2,9 +2,9 @@
 <launch>
 
     <!-- Parameters for Blue box coordinates -->
-    <arg name="blue_box_x" default="1.0" />
-    <arg name="blue_box_y" default="1.0" />
-    <arg name="blue_box_z" default="1.0" />
+    <arg name="blue_box_x" default="0.5" />
+    <arg name="blue_box_y" default="0.5" />
+    <arg name="blue_box_z" default="0.5" />
 
     <!-- Parameters for Gray box coordinates -->
     <arg name="gray_box_x" default="1.2" />
@@ -32,8 +32,8 @@
     <arg name="yellow_box_z" default="1.0" />
 
     <!-- Spawn a simple box of unit side in gazebo -->
-    <node name="spawn_box_simple" pkg="gazebo_ros" type="spawn_model"
-        args="-file $(find fg_gazebo_example)/models/simple_cube/simple_cube.sdf -sdf -model my_cube -x 5.0 -y 5.0 -z 5.0" />
+    <!-- <node name="spawn_box_simple" pkg="gazebo_ros" type="spawn_model"
+        <args="-file $(find fg_gazebo_example)/models/simple_cube/simple_cube.sdf -sdf -model my_cube -x 5.0 -y 5.0 -z 5.0" /> -->
 
     <!-- Spawn a blue box with blue box spawn coordinates -->
     <node name="spawn_box_blue" pkg="gazebo_ros" type="spawn_model"
