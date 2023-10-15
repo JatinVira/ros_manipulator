@@ -27,5 +27,5 @@ def show_image_with_mouse_coordinates(image_path):
 
 
 # Example Usage
-image_path = "/home/jatinvira/free_ws/src/ros_manipulator/760362000000.png"
+image_path = "/home/jatinvira/free_ws/src/ros_manipulator/fg_gazebo_example/bag_out/110589000000.png"
 show_image_with_mouse_coordinates(image_path)
