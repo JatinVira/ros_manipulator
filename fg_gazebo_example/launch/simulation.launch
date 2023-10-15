@@ -22,9 +22,9 @@
     <arg name="x" value="0.5" />
     <arg name="y" value="0.5" />
     <arg name="z" value="1.5" />
-    <arg name="roll" value="1.57" />
+    <arg name="roll" value="0.0" />
     <arg name="pitch" value="1.57" />
-    <arg name="yaw" value="1.57" />
+    <arg name="yaw" value="0.0" />
   </include>
 
 
