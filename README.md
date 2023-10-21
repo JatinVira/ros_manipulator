@@ -27,14 +27,37 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
     source ~/.bashrc
     ```
 
-5. Clone the repository into the catkin workspace:
+5. Setup SSH Keys for GitHub:
+
+    First open a new terminal and generate a new SSH key:
+
+    ```bash
+    cd
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+    ```
+
+    When you're prompted to "Enter a file in which to save the key," press Enter. This accepts the default file location.
+    Keep pressing enter until the key is generated.
+
+    View the contents of the public key file:
+
+    ```bash
+    cat ~/.ssh/id_ed25519.pub
+    ```
+
+    Copy the contents of the file and add it to your GitHub account.
+    [Set Keys here](https://github.com/settings/keys)
+
+    Refer the [GitHub SSH Key Setup Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for more details.
+
+6. Clone the repository into the catkin workspace:
 
     ```bash
     cd ~/catkin_ws/src
-    git clone https://github.com/JatinVira/ros_manipulator.git
+    git clone git@github.com:JatinVira/ros_manipulator.git
     ```
 
-6. Building the workspace:
+7. Building the workspace:
 
     ```bash
     cd ~/catkin_ws/
@@ -43,7 +66,7 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
     source ~/.bashrc
     ```
 
-7. Generating Simulation Models:
+8. Generating Simulation Models:
 
     ```bash
     cd ~/catkin_ws/src/ros_manipulator/fg_gazebo_example/
