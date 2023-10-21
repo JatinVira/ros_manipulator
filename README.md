@@ -17,17 +17,25 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
     sudo apt-get install ros-noetic-ros-control ros-noetic-ros-controllers ros-noetic-moveit
     ```
 
-4. Create a catkin workspace, initialize it and source it:
+4. Install catkin tools:
+
+    ```bash
+    sudo apt-get install python3-catkin-tools
+    ```
+
+5. Create a catkin workspace, initialize it, build it and then source it:
 
     ```bash
     mkdir -p ~/catkin_ws/src
-    cd ~/catkin_ws/
+    cd ~/catkin_ws/src
     catkin_init_workspace
+    cd ~/catkin_ws/
+    catkin build
     echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
     source ~/.bashrc
     ```
 
-5. Setup SSH Keys for GitHub:
+6. Setup SSH Keys for GitHub:
 
     First open a new terminal and generate a new SSH key:
 
@@ -50,14 +58,14 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
 
     Refer the [GitHub SSH Key Setup Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for more details.
 
-6. Clone the repository into the catkin workspace:
+7. Clone the repository into the catkin workspace:
 
     ```bash
     cd ~/catkin_ws/src
     git clone git@github.com:JatinVira/ros_manipulator.git
     ```
 
-7. Building the workspace:
+8. Building the workspace:
 
     ```bash
     cd ~/catkin_ws/
@@ -66,7 +74,7 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
     source ~/.bashrc
     ```
 
-8. Generating Simulation Models:
+9. Generating Simulation Models:
 
     ```bash
     cd ~/catkin_ws/src/ros_manipulator/fg_gazebo_example/
