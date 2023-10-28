@@ -71,8 +71,8 @@ for color, rgba in colors.items():
         </material>
       </visual>
       <velocity_decay>
-        <linear>0.1</linear>
-        <angular>0.1</angular>
+        <linear>0.0</linear>
+        <angular>0.0</angular>
       </velocity_decay>
       <gravity>1</gravity>
       <self_collide>true</self_collide>
