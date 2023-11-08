@@ -1,0 +1,15 @@
+<launch>
+
+    <arg name="world" default="$(find fg_gazebo_example)/world/base_world.world" />
+    <arg name="paused" default="false" />
+    <arg name="use_sim_time" default="true" />
+    <arg name="gui" default="true" />
+    <arg name="headless" default="false" />
+    <arg name="debug" default="false" />
+
+    <!-- Load empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world)" />
+    </include>
+</launch>
+  
