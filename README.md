@@ -95,6 +95,11 @@ Refer the [ROS Noetic Installation Guide](http://wiki.ros.org/noetic/Installatio
     rosrun fg_gazebo_example move_viewpoints.py
     ```
 
+##Important Notes
+
+1. Copy paste the entire model folder in the `~/.gazebo/models` directory for the simulation to work.
+
+
 ## References
 
 1. [Foxglove Studio](https://foxglove.dev/blog/simulating-robotic-scenarios-with-ros1-and-gazebo)
