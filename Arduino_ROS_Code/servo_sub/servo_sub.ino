@@ -67,11 +67,10 @@ int intermediate_position[NUM_SERVOS] = {90, 90, 90,
 int default_position[NUM_SERVOS] = {120, 130, 150, 160, 90, GRIPPER_OPEN_ANGLE};
 
 // Servo Angles for the drop position for each color
-// TO DO: Change the angles to the correct angles
-int blue_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, GRIPPER_OPEN_ANGLE};
-int green_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, GRIPPER_OPEN_ANGLE};
-int yellow_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, GRIPPER_OPEN_ANGLE};
-int pink_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, GRIPPER_OPEN_ANGLE};
+int blue_drop_position[NUM_SERVOS] = {60, 112, 140, 142, 90, GRIPPER_OPEN_ANGLE};
+int green_drop_position[NUM_SERVOS] = {60, 115, 135, 168, 90, GRIPPER_OPEN_ANGLE};
+int yellow_drop_position[NUM_SERVOS] = {44, 115, 140, 142, 90, GRIPPER_OPEN_ANGLE};
+int pink_drop_position[NUM_SERVOS] = {45, 110, 137, 168, 90, GRIPPER_OPEN_ANGLE};
 
 // Create a Node Handle
 ros::NodeHandle nh;
