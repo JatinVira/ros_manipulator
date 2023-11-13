@@ -1,5 +1,6 @@
 // A Arduino sketch to setup a simple subscriber over ROS Serial to control a
-// servo Author: Jatin Vira
+// servo 
+// Author: Jatin Vira
 
 // Logic:
 // 1. Setup a subscriber to listen to the topic "box_color"
@@ -31,6 +32,14 @@
 // Define the number of Servo Motors
 #define NUM_SERVOS 6
 
+// Define the Servo Open and Close Angles for the Gripper
+#define GRIPPER_OPEN_ANGLE 95
+#define GRIPPER_CLOSE_ANGLE 140
+
+// Define toggle values for the gripper
+#define GRIPPER_OPEN true
+#define GRIPPER_CLOSE false
+
 // Define the Servo Pins
 #define SERVO_1_PIN 2
 #define SERVO_2_PIN 3
@@ -47,21 +56,21 @@ Servo servo_4;
 Servo servo_5;
 Servo servo_6;
 
-// Define an array containing the servo angles for the pickup position
-int pickup_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 90};
+// Servo Angles for the pickup position
+int pickup_position[NUM_SERVOS] = {135, 120, 140, 155, 90, 95};
 
-// Define an array containing the servo angles for the intermediate position
-int intermediate_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 90};
+// Servo Angles for the intermediate position
+int intermediate_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 140};
 
-// Define 4 arrays containing the servo angles for the drop position for each
-// color
-int blue_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 90};
-int green_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 90};
-int yellow_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 90};
-int pink_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 90};
+// Servo Angles for the default position
+int default_position[NUM_SERVOS] = {120, 130, 150, 160, 90, 95};
 
-// Define an array containing the servo angles for the default position
-int default_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 90};
+// Servo Angles for the drop position for each color
+// TO DO: Change the angles to the correct angles
+int blue_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 95};
+int green_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 95};
+int yellow_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 95};
+int pink_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 95};
 
 // Create a Node Handle
 ros::NodeHandle nh;
@@ -88,6 +97,19 @@ void publish_status(std_msgs::String status) {
   status_pub.publish(&status_msg);
 }
 
+// A function to move the gripper to close or open position
+// Arguments: A boolean value to indicate whether to open or close the gripper
+void move_gripper(bool open) {
+  // Check if the gripper is to be opened or closed
+  if (open) {
+    // Open the gripper
+    servo_6.write(GRIPPER_OPEN_ANGLE);
+  } else {
+    // Close the gripper
+    servo_6.write(GRIPPER_CLOSE_ANGLE);
+  }
+}
+
 // A function to move all the servos to their respective positions
 // Arguments: An array containing the servo angles for each servo
 void move_servos(int servo_angles[]) {
@@ -104,6 +126,8 @@ void move_servos(int servo_angles[]) {
 void pos_seq_for_blue() {
   // Move the arm to the pickup position
   move_servos(pickup_position);
+  // Close the gripper
+  move_gripper(GRIPPER_CLOSE);
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   // Move the arm to the drop position
@@ -116,6 +140,8 @@ void pos_seq_for_blue() {
 void pos_seq_for_green() {
   // Move the arm to the pickup position
   move_servos(pickup_position);
+  // Close the gripper
+  move_gripper(GRIPPER_CLOSE);
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   // Move the arm to the drop position
@@ -128,6 +154,8 @@ void pos_seq_for_green() {
 void pos_seq_for_yellow() {
   // Move the arm to the pickup position
   move_servos(pickup_position);
+  // Close the gripper
+  move_gripper(GRIPPER_CLOSE);
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   // Move the arm to the drop position
@@ -140,6 +168,8 @@ void pos_seq_for_yellow() {
 void pos_seq_for_pink() {
   // Move the arm to the pickup position
   move_servos(pickup_position);
+  // Close the gripper
+  move_gripper(GRIPPER_CLOSE);
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   // Move the arm to the drop position
@@ -222,6 +252,9 @@ void setup() {
     digitalWrite(LED_BUILTIN, LOW);
     delay(100);
   }
+
+  // Setup ROS
+  setup_ROS();
 
   // Publish the status of the arm as ready
   msg_to_send.data = "Arm Setup Complete";
