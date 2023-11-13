@@ -1,5 +1,5 @@
 // A Arduino sketch to setup a simple subscriber over ROS Serial to control a
-// servo 
+// servo
 // Author: Jatin Vira
 
 // Logic:
@@ -57,20 +57,21 @@ Servo servo_5;
 Servo servo_6;
 
 // Servo Angles for the pickup position
-int pickup_position[NUM_SERVOS] = {135, 120, 140, 155, 90, 95};
+int pickup_position[NUM_SERVOS] = {135, 120, 140, 155, 90, GRIPPER_OPEN_ANGLE};
 
 // Servo Angles for the intermediate position
-int intermediate_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 140};
+int intermediate_position[NUM_SERVOS] = {90, 90, 90,
+                                         90, 90, GRIPPER_CLOSE_ANGLE};
 
 // Servo Angles for the default position
-int default_position[NUM_SERVOS] = {120, 130, 150, 160, 90, 95};
+int default_position[NUM_SERVOS] = {120, 130, 150, 160, 90, GRIPPER_OPEN_ANGLE};
 
 // Servo Angles for the drop position for each color
 // TO DO: Change the angles to the correct angles
-int blue_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 95};
-int green_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 95};
-int yellow_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 95};
-int pink_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, 95};
+int blue_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, GRIPPER_OPEN_ANGLE};
+int green_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, GRIPPER_OPEN_ANGLE};
+int yellow_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, GRIPPER_OPEN_ANGLE};
+int pink_drop_position[NUM_SERVOS] = {90, 90, 90, 90, 90, GRIPPER_OPEN_ANGLE};
 
 // Create a Node Handle
 ros::NodeHandle nh;
@@ -245,6 +246,9 @@ void setup() {
   // Setup the Onboard LED
   pinMode(LED_BUILTIN, OUTPUT);
 
+  // Setup ROS
+  setup_ROS();
+
   // Blink the onboard LED 5 times to indicate that the Subscriber is connected
   for (int i = 0; i < 5; i++) {
     digitalWrite(LED_BUILTIN, HIGH);
@@ -252,9 +256,6 @@ void setup() {
     digitalWrite(LED_BUILTIN, LOW);
     delay(100);
   }
-
-  // Setup ROS
-  setup_ROS();
 
   // Publish the status of the arm as ready
   msg_to_send.data = "Arm Setup Complete";
