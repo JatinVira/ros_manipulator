@@ -67,25 +67,20 @@ int pickup_position[NUM_SERVOS] = {135, 120, 140, 155, 90, GRIPPER_OPEN_ANGLE};
 
 // Servo Angles for the intermediate position
 int intermediate_position[NUM_SERVOS] = {90, 90, 90,
-                                         90, 90, GRIPPER_CLOSE_ANGLE
-                                        };
+                                         90, 90, GRIPPER_CLOSE_ANGLE};
 
 // Servo Angles for the default position
 int default_position[NUM_SERVOS] = {120, 130, 150, 160, 90, GRIPPER_OPEN_ANGLE};
 
 // Servo Angles for the drop position for each color
 int blue_drop_position[NUM_SERVOS] = {60,  112, 140,
-                                      142, 90,  GRIPPER_OPEN_ANGLE
-                                     };
+                                      142, 90,  GRIPPER_OPEN_ANGLE};
 int green_drop_position[NUM_SERVOS] = {60,  115, 135,
-                                       168, 90,  GRIPPER_OPEN_ANGLE
-                                      };
+                                       168, 90,  GRIPPER_OPEN_ANGLE};
 int yellow_drop_position[NUM_SERVOS] = {44,  115, 140,
-                                        142, 90,  GRIPPER_OPEN_ANGLE
-                                       };
+                                        142, 90,  GRIPPER_OPEN_ANGLE};
 int pink_drop_position[NUM_SERVOS] = {45,  110, 137,
-                                      168, 90,  GRIPPER_OPEN_ANGLE
-                                     };
+                                      168, 90,  GRIPPER_OPEN_ANGLE};
 
 // Create a Node Handle
 ros::NodeHandle nh;
@@ -132,23 +127,56 @@ void move_gripper(bool open) {
 // Move the servos one after the other and wait for 100ms after each servo is
 // moved
 void move_servos(int servo_angles[]) {
-  // Move each servo to its respective angle
-  servo_1.write(servo_angles[0]);
-  delay(DELAY_BW_SERVOS);
-  servo_2.write(servo_angles[1]);
-  delay(DELAY_BW_SERVOS);
-  servo_3.write(servo_angles[2]);
-  delay(DELAY_BW_SERVOS);
-  servo_4.write(servo_angles[3]);
-  delay(DELAY_BW_SERVOS);
-  servo_5.write(servo_angles[4]);
-  delay(DELAY_BW_SERVOS);
-  servo_6.write(servo_angles[5]);
-  delay(DELAY_BW_SERVOS);
+  // Check if intermediate poisition is passed as argument, if yes, do nothing
+  // with the 6th servo Rest everything is same
+  if (servo_angles == intermediate_position) {
+    // Move each servo to its respective angle
+    servo_1.write(servo_angles[0]);
+    delay(DELAY_BW_SERVOS);
+    servo_2.write(servo_angles[1]);
+    delay(DELAY_BW_SERVOS);
+    servo_3.write(servo_angles[2]);
+    delay(DELAY_BW_SERVOS);
+    servo_4.write(servo_angles[3]);
+    delay(DELAY_BW_SERVOS);
+    servo_5.write(servo_angles[4]);
+    delay(DELAY_BW_SERVOS);
+  } else {
+    // Move each servo to its respective angle
+    servo_1.write(servo_angles[0]);
+    delay(DELAY_BW_SERVOS);
+    servo_2.write(servo_angles[1]);
+    delay(DELAY_BW_SERVOS);
+    servo_3.write(servo_angles[2]);
+    delay(DELAY_BW_SERVOS);
+    servo_4.write(servo_angles[3]);
+    delay(DELAY_BW_SERVOS);
+    servo_5.write(servo_angles[4]);
+    delay(DELAY_BW_SERVOS);
+    servo_6.write(servo_angles[5]);
+    delay(DELAY_BW_SERVOS);
+  }
+  // // Move each servo to its respective angle
+  // servo_1.write(servo_angles[0]);
+  // delay(DELAY_BW_SERVOS);
+  // servo_2.write(servo_angles[1]);
+  // delay(DELAY_BW_SERVOS);
+  // servo_3.write(servo_angles[2]);
+  // delay(DELAY_BW_SERVOS);
+  // servo_4.write(servo_angles[3]);
+  // delay(DELAY_BW_SERVOS);
+  // servo_5.write(servo_angles[4]);
+  // delay(DELAY_BW_SERVOS);
+  // servo_6.write(servo_angles[5]);
+  // delay(DELAY_BW_SERVOS);
 }
 
 // position sequence for the color blue
 void pos_seq_for_blue() {
+  // Move the arm to the intermediate position
+  move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
@@ -165,6 +193,10 @@ void pos_seq_for_blue() {
   move_servos(blue_drop_position);
   delay(DELAY_BW_POSE_SEQ);
 
+  // Move the arm to the intermediate position
+  move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the default position
   move_servos(default_position);
   delay(DELAY_BW_POSE_SEQ);
@@ -172,6 +204,10 @@ void pos_seq_for_blue() {
 
 // position sequence for the color green
 void pos_seq_for_green() {
+  // Move the arm to the intermediate position
+  move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
@@ -187,6 +223,10 @@ void pos_seq_for_green() {
   move_servos(green_drop_position);
   delay(DELAY_BW_POSE_SEQ);
 
+  // Move the arm to the intermediate position
+  move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the default position
   move_servos(default_position);
   delay(DELAY_BW_POSE_SEQ);
@@ -194,6 +234,10 @@ void pos_seq_for_green() {
 
 // position sequence for the color yellow
 void pos_seq_for_yellow() {
+  // Move the arm to the intermediate position
+  move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
@@ -210,6 +254,10 @@ void pos_seq_for_yellow() {
   move_servos(yellow_drop_position);
   delay(DELAY_BW_POSE_SEQ);
 
+  // Move the arm to the intermediate position
+  move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the default position
   move_servos(default_position);
   delay(DELAY_BW_POSE_SEQ);
@@ -217,6 +265,10 @@ void pos_seq_for_yellow() {
 
 // position sequence for the color pink
 void pos_seq_for_pink() {
+  // Move the arm to the intermediate position
+  move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
@@ -231,6 +283,10 @@ void pos_seq_for_pink() {
 
   // Move the arm to the drop position
   move_servos(pink_drop_position);
+  delay(DELAY_BW_POSE_SEQ);
+
+  // Move the arm to the intermediate position
+  move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
 
   // Move the arm to the default position
