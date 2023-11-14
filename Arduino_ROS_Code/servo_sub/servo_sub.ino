@@ -49,7 +49,7 @@
 #define SERVO_6_PIN 7
 
 // Define the time periods for various delays
-#define DELAY_BW_SERVOS 100     // ms
+#define DELAY_BW_SERVOS 500     // ms
 #define DELAY_GRIPPER 100       // ms
 #define DELAY_BW_POSE_SEQ 1000  // ms
 #define DELAY_LOOP 10           // ms
