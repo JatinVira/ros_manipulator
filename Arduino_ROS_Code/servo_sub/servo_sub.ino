@@ -334,6 +334,10 @@ void setup() {
   // Test the Arm
   // test_arm();
 
+  // Initialize the arm position to the default position
+  move_servos(default_position);
+  delay(1000);
+
   // Blink the onboard LED 5 times to indicate that the Subscriber is connected
   for (int i = 0; i < 5; i++) {
     digitalWrite(LED_BUILTIN, HIGH);
