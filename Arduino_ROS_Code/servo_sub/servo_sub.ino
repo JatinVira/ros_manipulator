@@ -67,10 +67,14 @@ int intermediate_position[NUM_SERVOS] = {90, 90, 90,
 int default_position[NUM_SERVOS] = {120, 130, 150, 160, 90, GRIPPER_OPEN_ANGLE};
 
 // Servo Angles for the drop position for each color
-int blue_drop_position[NUM_SERVOS] = {60, 112, 140, 142, 90, GRIPPER_OPEN_ANGLE};
-int green_drop_position[NUM_SERVOS] = {60, 115, 135, 168, 90, GRIPPER_OPEN_ANGLE};
-int yellow_drop_position[NUM_SERVOS] = {44, 115, 140, 142, 90, GRIPPER_OPEN_ANGLE};
-int pink_drop_position[NUM_SERVOS] = {45, 110, 137, 168, 90, GRIPPER_OPEN_ANGLE};
+int blue_drop_position[NUM_SERVOS] = {60,  112, 140,
+                                      142, 90,  GRIPPER_OPEN_ANGLE};
+int green_drop_position[NUM_SERVOS] = {60,  115, 135,
+                                       168, 90,  GRIPPER_OPEN_ANGLE};
+int yellow_drop_position[NUM_SERVOS] = {44,  115, 140,
+                                        142, 90,  GRIPPER_OPEN_ANGLE};
+int pink_drop_position[NUM_SERVOS] = {45,  110, 137,
+                                      168, 90,  GRIPPER_OPEN_ANGLE};
 
 // Create a Node Handle
 ros::NodeHandle nh;
@@ -237,6 +241,30 @@ void setup_ROS() {
   }
 }
 
+void test_arm() {
+
+  // Test the default position
+  move_servos(default_position);
+
+  // Test the pickup position
+  move_servos(pickup_position);
+
+  // Test the intermediate position
+  move_servos(intermediate_position);
+
+  // Test the drop position for blue
+  move_servos(blue_drop_position);
+
+  // Test the drop position for green
+  move_servos(green_drop_position);
+
+  // Test the drop position for yellow
+  move_servos(yellow_drop_position);
+
+  // Test the drop position for pink
+  move_servos(pink_drop_position);
+}
+
 // Setup Function
 void setup() {
   // Setup the Servos
@@ -247,6 +275,9 @@ void setup() {
 
   // Setup ROS
   setup_ROS();
+
+  // Test the Arm
+  // test_arm();
 
   // Blink the onboard LED 5 times to indicate that the Subscriber is connected
   for (int i = 0; i < 5; i++) {
