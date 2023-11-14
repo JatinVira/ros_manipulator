@@ -33,8 +33,8 @@
 #define NUM_SERVOS 6
 
 // Define the Servo Open and Close Angles for the Gripper
-#define GRIPPER_OPEN_ANGLE 95
-#define GRIPPER_CLOSE_ANGLE 140
+#define GRIPPER_OPEN_ANGLE 95    // Degrees
+#define GRIPPER_CLOSE_ANGLE 140  // Degrees
 
 // Define toggle values for the gripper
 #define GRIPPER_OPEN true
@@ -47,6 +47,12 @@
 #define SERVO_4_PIN 5
 #define SERVO_5_PIN 6
 #define SERVO_6_PIN 7
+
+// Define the time periods for various delays
+#define DELAY_BW_SERVOS 100     // ms
+#define DELAY_GRIPPER 100       // ms
+#define DELAY_BW_POSE_SEQ 1000  // ms
+#define DELAY_LOOP 10           // ms
 
 // Define the Servo Objects
 Servo servo_1;
@@ -108,78 +114,123 @@ void move_gripper(bool open) {
   if (open) {
     // Open the gripper
     servo_6.write(GRIPPER_OPEN_ANGLE);
+    delay(DELAY_GRIPPER);
   } else {
     // Close the gripper
     servo_6.write(GRIPPER_CLOSE_ANGLE);
+    delay(DELAY_GRIPPER);
   }
 }
 
 // A function to move all the servos to their respective positions
 // Arguments: An array containing the servo angles for each servo
+// Move the servos one after the other and wait for 100ms after each servo is
+// moved
 void move_servos(int servo_angles[]) {
   // Move each servo to its respective angle
   servo_1.write(servo_angles[0]);
+  delay(DELAY_BW_SERVOS);
   servo_2.write(servo_angles[1]);
+  delay(DELAY_BW_SERVOS);
   servo_3.write(servo_angles[2]);
+  delay(DELAY_BW_SERVOS);
   servo_4.write(servo_angles[3]);
+  delay(DELAY_BW_SERVOS);
   servo_5.write(servo_angles[4]);
+  delay(DELAY_BW_SERVOS);
   servo_6.write(servo_angles[5]);
+  delay(DELAY_BW_SERVOS);
 }
 
 // position sequence for the color blue
 void pos_seq_for_blue() {
   // Move the arm to the pickup position
   move_servos(pickup_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the drop position
   move_servos(blue_drop_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the default position
   move_servos(default_position);
+  delay(DELAY_BW_POSE_SEQ);
 }
 
 // position sequence for the color green
 void pos_seq_for_green() {
   // Move the arm to the pickup position
   move_servos(pickup_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
+  delay(DELAY_BW_POSE_SEQ);
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the drop position
   move_servos(green_drop_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the default position
   move_servos(default_position);
+  delay(DELAY_BW_POSE_SEQ);
 }
 
 // position sequence for the color yellow
 void pos_seq_for_yellow() {
   // Move the arm to the pickup position
   move_servos(pickup_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the drop position
   move_servos(yellow_drop_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the default position
   move_servos(default_position);
+  delay(DELAY_BW_POSE_SEQ);
 }
 
 // position sequence for the color pink
 void pos_seq_for_pink() {
   // Move the arm to the pickup position
   move_servos(pickup_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the drop position
   move_servos(pink_drop_position);
+  delay(DELAY_BW_POSE_SEQ);
+
   // Move the arm to the default position
   move_servos(default_position);
+  delay(DELAY_BW_POSE_SEQ);
 }
 
 // function to pass the color as argument, and depending on the color,
@@ -242,7 +293,6 @@ void setup_ROS() {
 }
 
 void test_arm() {
-
   // Test the default position
   move_servos(default_position);
 
@@ -296,4 +346,7 @@ void setup() {
 void loop() {
   // Spin the Subscriber
   nh.spinOnce();
+
+  // Delay for 10ms
+  delay(DELAY_LOOP);
 }
