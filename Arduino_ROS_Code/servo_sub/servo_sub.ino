@@ -63,14 +63,14 @@ Servo servo_5;
 Servo servo_6;
 
 // Servo Angles for the pickup position
-int pickup_position[NUM_SERVOS] = {135, 120, 140, 155, 90, GRIPPER_OPEN_ANGLE};
+int pickup_position[NUM_SERVOS] = {135, 120, 140, 145, 90, GRIPPER_OPEN_ANGLE};
 
 // Servo Angles for the intermediate position
 int intermediate_position[NUM_SERVOS] = {90, 90, 90,
                                          90, 90, GRIPPER_CLOSE_ANGLE};
 
 // Servo Angles for the default position
-int default_position[NUM_SERVOS] = {120, 130, 150, 160, 90, GRIPPER_OPEN_ANGLE};
+int default_position[NUM_SERVOS] = {100, 120, 130, 160, 90, GRIPPER_OPEN_ANGLE};
 
 // Servo Angles for the drop position for each color
 int blue_drop_position[NUM_SERVOS] = {60,  112, 140,
