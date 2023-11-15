@@ -1,0 +1,13 @@
+<!-- A launch file to connect to the Robotic Manipulator Arm on an Arduino using the ROS Serial -->
+<!-- Read the port number given while launching the node and keep default as well -->
+<!-- The baud rate is set to 57600 by default -->
+
+<launch>
+    <arg name="port" default="/dev/ttyACM0" />
+    <arg name="baud" default="57600" />
+
+    <node name="serial_node" pkg="rosserial_python" type="serial_node.py">
+        <param name="port" value="$(arg port)" />
+        <param name="baud" value="$(arg baud)" />
+    </node>
+</launch>
