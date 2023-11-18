@@ -19,6 +19,7 @@ import numpy as np
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 from std_msgs.msg import String
+import time
 
 
 class ObjectDetection:
@@ -27,25 +28,58 @@ class ObjectDetection:
         rospy.init_node("object_detection_cv", anonymous=True)
 
         # Define the publisher
-        self.pub = rospy.Publisher("object_color", String, queue_size=10)
+        self.pub = rospy.Publisher("box_color", String, queue_size=10)
 
         # Define the subscriber
         self.sub = rospy.Subscriber("/camera/image", Image, self.callback)
+
+        # Define another subscriber
+        self.sub2 = rospy.Subscriber("/arm_status", String, self.callback2)
 
         # Define the bridge
         self.bridge = CvBridge()
 
         # Define the ROI
-        self.roi = (71, 279, 121, 116)
+        self.roi = (82, 58, 150, 150)
 
         # Define the resize size for images
         self.resize_size = (640, 480)
 
+        # Define the flag to check if the arm is ready
+        self.ready = False
+
         # Define the color ranges in HSV
         self.pink_range = ((150, 100, 100), (180, 255, 255))
         self.green_range = ((40, 100, 100), (80, 255, 255))
-        self.blue_range = ((100, 100, 100), (140, 255, 255))
+        self.blue_range = ((102, 89, 85), (114, 209, 255))
         self.yellow_range = ((20, 100, 100), (40, 255, 255))
+
+        # Enable handshaking
+        print("Handshaking with the Arm")
+        self.pub.publish("Handshake Message")
+        time.sleep(1)
+
+        # Print a message
+        print("Connecting to the Arm")
+        self.pub.publish("Connect Arm")
+
+        print("Object Detection Node Initialized")
+
+    def callback2(self, data):
+        """
+        The callback function for the subscriber
+        Will obtain messages from arduino to check whether the arm is ready or processing a command
+        Depending on the message, the program will either process the image or not
+        """
+        print("Recieved Arm Status as {}".format(data.data))
+        # Check if the arm is ready
+        if data.data == "Ready":
+            # Set the flag to true
+            self.ready = True
+            print("Set Arm Ready as True")
+        else:
+            # Set the flag to false
+            self.ready = False
 
     def callback(self, data):
         """
@@ -58,7 +92,6 @@ class ObjectDetection:
         except CvBridgeError as e:
             print(e)
 
-        # Call the detect_color function
         self.detect_color(cv_image)
 
     def detect_color(self, image):
@@ -113,10 +146,14 @@ class ObjectDetection:
         color = self.find_color(hsv_image[y : y + h, x : x + w])
 
         # Print the color and the bounding box coordinates
-        print(color, x, y, w, h)
+        # print(color, x, y, w, h)
 
         # Publish the color
-        self.pub.publish(color)
+        if self.ready:
+            self.pub.publish(color)
+            time.sleep(1)
+            print("Done Processing Image so setting Arm Ready as False")
+            self.ready = False
 
         # Show the image
         cv2.imshow("Image", image)
