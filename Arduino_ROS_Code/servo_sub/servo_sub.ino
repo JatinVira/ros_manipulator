@@ -302,18 +302,29 @@ void move_arm(String color) {
     msg_to_send.data = "Blue Color Received";
     publish_status(msg_to_send);
     pos_seq_for_blue();
+    msg_to_send.data = "Ready";
+    publish_status(msg_to_send);
   } else if (color == "green") {
     msg_to_send.data = "Green Color Received";
     publish_status(msg_to_send);
     pos_seq_for_green();
+    msg_to_send.data = "Ready";
+    publish_status(msg_to_send);
   } else if (color == "yellow") {
     msg_to_send.data = "Yellow Color Received";
     publish_status(msg_to_send);
     pos_seq_for_yellow();
+    msg_to_send.data = "Ready";
+    publish_status(msg_to_send);
   } else if (color == "pink") {
     msg_to_send.data = "Pink Color Received";
     publish_status(msg_to_send);
     pos_seq_for_pink();
+    msg_to_send.data = "Ready";
+    publish_status(msg_to_send);
+  } else if (color == "Connect Arm") {
+    msg_to_send.data = "Ready";
+    publish_status(msg_to_send);
   } else {
     // Blink the onboard LED 3 times
     for (int i = 0; i < 3; i++) {
@@ -402,9 +413,10 @@ void setup() {
     delay(100);
   }
 
-  // Publish the status of the arm as ready
-  msg_to_send.data = "Arm Setup Complete";
+  // Publish the status of the arm as : Ready
+  msg_to_send.data = "Ready";
   publish_status(msg_to_send);
+  delay(1000);
 }
 
 // Loop Function
