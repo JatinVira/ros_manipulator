@@ -27,6 +27,8 @@ class ObjectDetection:
         # Initialize the node
         rospy.init_node("object_detection_cv", anonymous=True)
 
+        self.init_complete = False
+
         # Define the publisher
         self.pub = rospy.Publisher("box_color", String, queue_size=10)
 
@@ -57,13 +59,18 @@ class ObjectDetection:
         # Enable handshaking
         print("Handshaking with the Arm")
         self.pub.publish("Handshake Message")
-        time.sleep(1)
+        time.sleep(4)
+        print("Handshake Delay Complete")
 
         # Print a message
         print("Connecting to the Arm")
         self.pub.publish("Connect Arm")
+        time.sleep(4)
+        print("Connection Delay Complete")
 
         print("Object Detection Node Initialized")
+        time.sleep(2)
+        self.init_complete = True
 
     def callback2(self, data):
         """
@@ -71,15 +78,19 @@ class ObjectDetection:
         Will obtain messages from arduino to check whether the arm is ready or processing a command
         Depending on the message, the program will either process the image or not
         """
+        if not self.init_complete:
+            print("Waiting for Initialization to Complete")
+            return
         print("Recieved Arm Status as {}".format(data.data))
         # Check if the arm is ready
         if data.data == "Ready":
             # Set the flag to true
             self.ready = True
-            print("Set Arm Ready as True")
+            print("Set Arm Ready as TRUE")
         else:
             # Set the flag to false
             self.ready = False
+            print("Set Arm Ready as FALSE")
 
     def callback(self, data):
         """
@@ -149,11 +160,12 @@ class ObjectDetection:
         # print(color, x, y, w, h)
 
         # Publish the color
-        if self.ready:
-            self.pub.publish(color)
-            time.sleep(1)
+        if self.ready and self.init_complete:
             print("Done Processing Image so setting Arm Ready as False")
             self.ready = False
+            print("Sending Color to Arm as {}".format(color))
+            self.pub.publish(color)
+            time.sleep(2)
 
         # Show the image
         cv2.imshow("Image", image)
