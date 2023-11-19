@@ -29,15 +29,6 @@ class ObjectDetection:
 
         self.init_complete = False
 
-        # Define the publisher
-        self.pub = rospy.Publisher("box_color", String, queue_size=10)
-
-        # Define the subscriber
-        self.sub = rospy.Subscriber("/camera/image", Image, self.callback)
-
-        # Define another subscriber
-        self.sub2 = rospy.Subscriber("/arm_status", String, self.callback2)
-
         # Define the bridge
         self.bridge = CvBridge()
 
@@ -56,11 +47,22 @@ class ObjectDetection:
         self.blue_range = ((102, 89, 85), (114, 209, 255))
         self.yellow_range = ((20, 100, 100), (40, 255, 255))
 
+        # Define the publisher
+        self.pub = rospy.Publisher("box_color", String, queue_size=10)
+        time.sleep(4)
+
+        # Define another subscriber
+        self.sub2 = rospy.Subscriber("/arm_status", String, self.callback2)
+        time.sleep(4)
+
         # Enable handshaking
         print("Handshaking with the Arm")
         self.pub.publish("Handshake Message")
         time.sleep(4)
         print("Handshake Delay Complete")
+
+        self.init_complete = True
+        print("Initialization Complete so setting Init Complete as TRUE")
 
         # Print a message
         print("Connecting to the Arm")
@@ -70,7 +72,11 @@ class ObjectDetection:
 
         print("Object Detection Node Initialized")
         time.sleep(2)
-        self.init_complete = True
+
+        # Define the subscriber
+        self.sub = rospy.Subscriber("/camera/image", Image, self.callback)
+
+        print("Subscribers Initialized")
 
     def callback2(self, data):
         """
