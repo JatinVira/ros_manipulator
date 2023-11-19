@@ -176,30 +176,55 @@ void pos_seq_for_blue() {
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Pickup Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Gripper Close";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the drop position
   move_servos(blue_drop_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Drop Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the default position
   move_servos(default_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Default Pos";
+  publish_status(msg_to_send);
+  delay(1000);
+
+  msg_to_send.data = "FN Complete";
+  publish_status(msg_to_send);
+  delay(1000);
 }
 
 // position sequence for the color green
@@ -299,43 +324,51 @@ void pos_seq_for_pink() {
 void move_arm(String color) {
   // Check the color
   if (color == "blue") {
-    msg_to_send.data = "Blue Color Received";
+    msg_to_send.data = "Blue Received";
     publish_status(msg_to_send);
+    delay(1000);
     pos_seq_for_blue();
     msg_to_send.data = "Ready";
     publish_status(msg_to_send);
+    delay(1000);
+    return;
   } else if (color == "green") {
-    msg_to_send.data = "Green Color Received";
+    msg_to_send.data = "Green Received";
     publish_status(msg_to_send);
+    delay(1000);
     pos_seq_for_green();
     msg_to_send.data = "Ready";
     publish_status(msg_to_send);
+    delay(1000);
+    return;
   } else if (color == "yellow") {
-    msg_to_send.data = "Yellow Color Received";
+    msg_to_send.data = "Yellow Received";
     publish_status(msg_to_send);
     pos_seq_for_yellow();
     msg_to_send.data = "Ready";
     publish_status(msg_to_send);
+    delay(1000);
+    return;
   } else if (color == "pink") {
-    msg_to_send.data = "Pink Color Received";
+    msg_to_send.data = "Pink Received";
     publish_status(msg_to_send);
+    delay(1000);
     pos_seq_for_pink();
     msg_to_send.data = "Ready";
     publish_status(msg_to_send);
+    delay(1000);
+    return;
   } else if (color == "Connect Arm") {
     msg_to_send.data = "Ready";
     publish_status(msg_to_send);
+    delay(1000);
+    return;
   } else {
-    // Blink the onboard LED 3 times
-    for (int i = 0; i < 3; i++) {
-      digitalWrite(LED_BUILTIN, HIGH);
-      delay(100);
-      digitalWrite(LED_BUILTIN, LOW);
-      delay(100);
-    }
     // Publish the status of the arm as : Invalid Color Received
     msg_to_send.data = "Invalid Color Received";
     publish_status(msg_to_send);
+    delay(1000);
+    return;
   }
 }
 
