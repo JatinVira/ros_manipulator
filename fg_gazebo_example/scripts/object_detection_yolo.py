@@ -111,7 +111,7 @@ class ObjectDetection:
             ]
 
             # Convert the image to RGB format
-            cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
+            # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
 
             # Call a function to detect the objects
             self.detect_objects(cv_image)
