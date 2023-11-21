@@ -113,83 +113,75 @@ class ObjectDetection:
             # Convert the image to RGB format
             cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
 
-            # Display the image
-            # cv2.imshow("Image", cv_image)
-            # cv2.waitKey(1)
-
             # Call a function to detect the objects
             self.detect_objects(cv_image)
 
     def detect_objects(self, img):
-        # Function to detect the objects in the image
-        # img is the image in RGB format
+        """
+        Function to detect the largest object in the image.
+        Args:
+            img: The image in RGB format.
+        """
 
-        # Detect the largest object in the image, and print the color and name of the object
-        # without saving the results
-        results = self.model(img, save=False)
+        if not self.init_complete:
+            print("Waiting for Initialization to Complete")
+            return
 
-        a = results[0].boxes.data
-        px = pd.DataFrame(a).astype("float")
-        list = []
+        # Use the model to detect objects in the image without saving the results
+        results = self.model.predict(img, save=False)
 
-        for index, row in px.iterrows():
-            x1 = int(row[0])
-            y1 = int(row[1])
-            x2 = int(row[2])
-            y2 = int(row[3])
-            d = int(row[5])
-            print(d)
+        # Extract bounding box data from the results
+        bounding_boxes_data = results[0].boxes.data
+
+        # Convert the bounding box data to a pandas DataFrame and cast to float
+        bounding_boxes_df = pd.DataFrame(bounding_boxes_data).astype("float")
+
+        # Initialize variables to store the largest bounding box and its area
+        largest_bounding_box = None
+        largest_area = 0
+
+        # Iterate over each row in the DataFrame (each bounding box)
+        for _, bounding_box in bounding_boxes_df.iterrows():
+            # Extract the coordinates of the bounding box
+            x1 = int(bounding_box[0])
+            y1 = int(bounding_box[1])
+            x2 = int(bounding_box[2])
+            y2 = int(bounding_box[3])
+
+            # Calculate the area of the bounding box
+            area = (x2 - x1) * (y2 - y1)
+
+            # If this bounding box is larger than the current largest, update the largest bounding box and area
+            if area > largest_area:
+                largest_bounding_box = bounding_box
+                largest_area = area
+
+        # If a largest bounding box was found, find the label of the object in the bounding box
+        if largest_bounding_box is not None:
+            # Extract the coordinates of the bounding box
+            x1 = int(largest_bounding_box[0])
+            y1 = int(largest_bounding_box[1])
+            x2 = int(largest_bounding_box[2])
+            y2 = int(largest_bounding_box[3])
+
+            # Draw a rectangle around the object
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0))
 
-        for re in results:
-            annotator = Annotator(img)
-            boxes = re.boxes.cpu().numpy()
-            ab = []
+            # Extract the label of the object in the bounding box
+            label = results[0].names[int(largest_bounding_box[5])]
 
-            # get boxes on cpu in numpy
-            for box in boxes:
-                # iterate boxes
-                r = box.xyxy[0].astype(int)
-                # get corner points as int
-                Klass = re.names[int(box.cls[0])]
-                # Get Class names
-                print(r, Klass)
+            # Add the label to the image
+            cv2.putText(
+                img,
+                label,
+                (x1, y1 - 10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.9,
+                (36, 255, 12),
+                2,
+            )
 
-                d = r.tolist()
-                ab.append(d)
-                b = box.xyxy[0]
-                # get box coordinates in (top, left, bottom, right) format
-                c = box.cls
-                annotator.box_label(b, self.model.names[int(c)])
-                print(d)
-
-            boxes = re.boxes.cpu().numpy()
-            # Get bounding boxes as images saved
-            for i, box in enumerate(boxes):
-                r = box.xyxy[0].astype(int)
-                crop = img[r[1] : r[3], r[0] : r[2]]
-                # cv2.imwrite('project/cropped/'+str(i) + ".png", crop)
-                print("__________")
-
-        img = annotator.result()
-        cv2.imshow("YOLO V8 Detection", img)
-        cv2.waitKey(1)
-
-        # Dont publish anything for now and move to next part of code
-        # Publish the color
-        #
-        # if self.ready and self.init_complete:
-        #    print("Done Processing Image so setting Arm Ready as False")
-        #   self.ready = False
-        # print("Sending Color to Arm as {}".format(color))
-        # self.pub.publish(color)
-        # time.sleep(2)
-        # Show the image
-        # cv2.imshow("Image", img)
-        # cv2.waitKey(1)
-        #
-
-        # display the image
+        # Display the image with the bounding box and label
         cv2.imshow("Image", img)
         cv2.waitKey(1)
 
