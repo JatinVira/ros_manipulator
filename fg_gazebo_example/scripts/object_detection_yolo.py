@@ -66,16 +66,16 @@ class ObjectDetection:
         self.yellow_range = ((20, 100, 100), (40, 255, 255))
 
         # Define the publisher
-        # self.pub = rospy.Publisher("box_color", String, queue_size=10)
-        # time.sleep(4)
+        self.pub = rospy.Publisher("box_color", String, queue_size=10)
+        time.sleep(4)
 
         # Define another subscriber
-        # self.sub2 = rospy.Subscriber("/arm_status", String, self.callback2)
-        # time.sleep(4)
+        self.sub2 = rospy.Subscriber("/arm_status", String, self.callback2)
+        time.sleep(4)
 
         # Enable handshaking
-        # print("Handshaking with the Arm")
-        # self.pub.publish("Handshake Message")
+        print("Handshaking with the Arm")
+        self.pub.publish("Handshake Message")
 
         # Define the subscriber
         self.sub = rospy.Subscriber(camera_topic, Image, self.callback)
@@ -86,12 +86,12 @@ class ObjectDetection:
         self.init_complete = True
         print("YOLO Model Initialized")
 
-    # def callback2(self, data):
-    #     # Callback function for the arm status subscriber
-    #     if data.data == "Ready":
-    #         self.ready = True
-    #     else:
-    #         self.ready = False
+    def callback2(self, data):
+        # Callback function for the arm status subscriber
+        if data.data == "Ready":
+            self.ready = True
+        else:
+            self.ready = False
 
     def callback(self, data):
         # Callback function for the camera subscriber
@@ -181,6 +181,14 @@ class ObjectDetection:
                 (36, 255, 12),
                 2,
             )
+
+            # Publish the color
+            if self.ready and self.init_complete:
+                print("Done Processing Image so setting Arm Ready as False")
+                self.ready = False
+                print("Sending Color to Arm as {}".format(label))
+                self.pub.publish(label)
+                time.sleep(2)
 
         # Display the image with the bounding box and label
         cv2.imshow("Image", img)
