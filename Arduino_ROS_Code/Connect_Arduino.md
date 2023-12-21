@@ -50,7 +50,7 @@ rostopic echo /arm_status
 Note: The data recieved from the Arduino can be interpreted to obtain the state of the Arm
 ```
 
-### Step 6: (MANUAL CONTROL)
+### Step 6: MANUAL CONTROL
 
 DONT DO THIS NOW:
 Control the Servo Motor externally by publishing color data to topic
@@ -65,8 +65,26 @@ Replace 'blue' with any of the other colors to control the servo motor
 The Arduino will crash if new messages are published to the topic before the previous message is processed
 ```
 
-### Step 7: (AUTONOMOUS CONTROL)
+### STEP 7: AUTONOMOUS CONTROL
 
+### STEP 7.1: Find the Region of Interest (ROI)
+
+```bash
+roscd fg_gazebo_example
+cd scripts
+python3 find_roi.py
 ```
 
+### Step 7.2: Run the Object Detection Node
+
+1. Start the Camera Node
+
+```bash
+rosrun fg_gazebo_example start_camera.py
+```
+
+2. Start the Color Detection Node
+
+```bash
+rosrun fg_gazebo_example object_detection_yolo.py
 ```
