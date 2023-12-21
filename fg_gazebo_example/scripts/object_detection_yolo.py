@@ -28,7 +28,8 @@ import os
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Join the script directory with the model filename
-model_path = os.path.join(script_dir, "Cubes_best.pt")
+# model_path = os.path.join(script_dir, "Cubes_best.pt")
+model_path = os.path.join(script_dir, "best.pt")
 
 # Global variables
 # model_path = "Cubes_best.pt"
