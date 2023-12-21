@@ -130,8 +130,8 @@ void move_servos(int servo_angles[]) {
   // with the 6th servo Rest everything is same
   if (servo_angles == intermediate_position) {
     // Move each servo to its respective angle
-    // servo_1.write(servo_angles[0]);
-    // delay(DELAY_BW_SERVOS);
+    //servo_1.write(servo_angles[0]);
+    //delay(DELAY_BW_SERVOS);
     servo_2.write(servo_angles[1]);
     delay(DELAY_BW_SERVOS);
     servo_3.write(servo_angles[2]);
@@ -175,49 +175,49 @@ void pos_seq_for_blue() {
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
-msg_to_send.data = "Interm Pos";
+  msg_to_send.data = "Interm Pos";
   publish_status(msg_to_send);
   delay(1000);
 
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
-msg_to_send.data = "Pickup Pos";
+  msg_to_send.data = "Pickup Pos";
   publish_status(msg_to_send);
   delay(1000);
 
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
   delay(DELAY_BW_POSE_SEQ);
-msg_to_send.data = "Gripper Close";
+  msg_to_send.data = "Gripper Close";
   publish_status(msg_to_send);
   delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
-msg_to_send.data = "Interm Pos";
+  msg_to_send.data = "Interm Pos";
   publish_status(msg_to_send);
   delay(1000);
 
   // Move the arm to the drop position
   move_servos(blue_drop_position);
   delay(DELAY_BW_POSE_SEQ);
-msg_to_send.data = "Drop Pos";
+  msg_to_send.data = "Drop Pos";
   publish_status(msg_to_send);
   delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
-msg_to_send.data = "Interm Pos";
+  msg_to_send.data = "Interm Pos";
   publish_status(msg_to_send);
   delay(1000);
 
   // Move the arm to the default position
   move_servos(default_position);
   delay(DELAY_BW_POSE_SEQ);
-msg_to_send.data = "Default Pos";
+  msg_to_send.data = "Default Pos";
   publish_status(msg_to_send);
   delay(1000);
 
@@ -325,18 +325,18 @@ void move_arm(String color) {
   if (color == "blue") {
     msg_to_send.data = "Blue Received";
     publish_status(msg_to_send);
-delay(1000);
+    delay(1000);
     pos_seq_for_blue();
-msg_to_send.data = "Ready";
+    msg_to_send.data = "Ready";
     publish_status(msg_to_send);
     delay(1000);
     return;
   } else if (color == "green") {
     msg_to_send.data = "Green Received";
     publish_status(msg_to_send);
-delay(1000);
+    delay(1000);
     pos_seq_for_green();
-msg_to_send.data = "Ready";
+    msg_to_send.data = "Ready";
     publish_status(msg_to_send);
     delay(1000);
     return;
@@ -344,16 +344,16 @@ msg_to_send.data = "Ready";
     msg_to_send.data = "Yellow Received";
     publish_status(msg_to_send);
     pos_seq_for_yellow();
-msg_to_send.data = "Ready";
+    msg_to_send.data = "Ready";
     publish_status(msg_to_send);
     delay(1000);
     return;
   } else if (color == "pink") {
     msg_to_send.data = "Pink Received";
     publish_status(msg_to_send);
-delay(1000);
+    delay(1000);
     pos_seq_for_pink();
-msg_to_send.data = "Ready";
+    msg_to_send.data = "Ready";
     publish_status(msg_to_send);
     delay(1000);
     return;
@@ -366,7 +366,7 @@ msg_to_send.data = "Ready";
         // Publish the status of the arm as : Invalid Color Received
     msg_to_send.data = "Invalid Color Received";
     publish_status(msg_to_send);
-delay(1000);
+    delay(1000);
     return;
   }
 }
@@ -448,7 +448,7 @@ void setup() {
   // Publish the status of the arm as : Ready
   msg_to_send.data = "Ready";
   publish_status(msg_to_send);
-delay(1000);
+  delay(1000);
 }
 
 // Loop Function
