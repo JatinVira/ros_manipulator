@@ -321,7 +321,7 @@ void pos_seq_for_pink() {
 // move the arm to the respective position sequence.
 void move_arm(String color) {
   // Check the color
-  if (color == "blue") {
+  if (color == "Blue") {
     msg_to_send.data = "Blue Received";
     publish_status(msg_to_send);
     delay(1000);
@@ -330,7 +330,7 @@ void move_arm(String color) {
     publish_status(msg_to_send);
     delay(1000);
     return;
-  } else if (color == "green") {
+  } else if (color == "Green") {
     msg_to_send.data = "Green Received";
     publish_status(msg_to_send);
     delay(1000);
@@ -339,7 +339,7 @@ void move_arm(String color) {
     publish_status(msg_to_send);
     delay(1000);
     return;
-  } else if (color == "yellow") {
+  } else if (color == "Yellow") {
     msg_to_send.data = "Yellow Received";
     publish_status(msg_to_send);
     pos_seq_for_yellow();
@@ -347,7 +347,7 @@ void move_arm(String color) {
     publish_status(msg_to_send);
     delay(1000);
     return;
-  } else if (color == "pink") {
+  } else if (color == "Pink") {
     msg_to_send.data = "Pink Received";
     publish_status(msg_to_send);
     delay(1000);
