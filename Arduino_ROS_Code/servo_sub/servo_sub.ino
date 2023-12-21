@@ -78,8 +78,7 @@ int green_drop_position[NUM_SERVOS] = {66,  100, 145,
                                        168, 90,  GRIPPER_OPEN_ANGLE};
 int yellow_drop_position[NUM_SERVOS] = {48,  105, 148,
                                         144, 90,  GRIPPER_OPEN_ANGLE};
-int pink_drop_position[NUM_SERVOS] = {48,  97, 147,
-                                      176, 90,  GRIPPER_OPEN_ANGLE};
+int pink_drop_position[NUM_SERVOS] = {48, 97, 147, 176, 90, GRIPPER_OPEN_ANGLE};
 
 // Create a Node Handle
 ros::NodeHandle nh;
@@ -130,8 +129,8 @@ void move_servos(int servo_angles[]) {
   // with the 6th servo Rest everything is same
   if (servo_angles == intermediate_position) {
     // Move each servo to its respective angle
-    //servo_1.write(servo_angles[0]);
-    //delay(DELAY_BW_SERVOS);
+    // servo_1.write(servo_angles[0]);
+    // delay(DELAY_BW_SERVOS);
     servo_2.write(servo_angles[1]);
     delay(DELAY_BW_SERVOS);
     servo_3.write(servo_angles[2]);
@@ -363,7 +362,7 @@ void move_arm(String color) {
     delay(1000);
     return;
   } else {
-        // Publish the status of the arm as : Invalid Color Received
+    // Publish the status of the arm as : Invalid Color Received
     msg_to_send.data = "Invalid Color Received";
     publish_status(msg_to_send);
     delay(1000);
