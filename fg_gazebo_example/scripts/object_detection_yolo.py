@@ -34,7 +34,7 @@ model_path = os.path.join(script_dir, "best.pt")
 # Global variables
 # model_path = "Cubes_best.pt"
 camera_topic = "/camera/image"
-region_of_interest = (82, 58, 150, 150)
+region_of_interest = (20, 104, 168, 191)
 confidence_threshold = 0.8
 resize_size = (640, 480)
 
@@ -59,46 +59,37 @@ class ObjectDetection:
         # Define the flag to check if the arm is ready
         self.ready = True  # False for laterrrr
 
-        # Define the color ranges in HSV
-        self.pink_range = ((150, 100, 100), (180, 255, 255))
-        self.green_range = ((40, 100, 100), (80, 255, 255))
-        self.blue_range = ((102, 89, 85), (114, 209, 255))
-        self.yellow_range = ((20, 100, 100), (40, 255, 255))
-
         # Define the publisher
         self.pub = rospy.Publisher("box_color", String, queue_size=10)
-        time.sleep(4)
+        time.sleep(2)
 
         # Define another subscriber
         self.sub2 = rospy.Subscriber("/arm_status", String, self.callback2)
-        time.sleep(4)
+        time.sleep(2)
+
+        # Define the YOLO model
+        self.model = YOLO(model_path)
+        print("YOLO Model Initialized")
 
         # Enable handshaking
         print("Handshaking with the Arm")
         self.pub.publish("Handshake Message")
-        time.sleep(4)
+        time.sleep(2)
         print("Handshake Delay Complete")
 
         self.init_complete = True
-        print("Initialization Complete so setting Init Complete as TRUE")
+        print("Init set as TRUE")
 
         print("Connecting to the Arm")
         self.pub.publish("Connect Arm")
-        time.sleep(4)
-        print("Connection Delay Complete")
-
-        # Define the YOLO model
-        self.model = YOLO(model_path)
-
-        print("Object Detection Node Initialized")
         time.sleep(2)
+        print("Connection Delay Complete")
 
         # Define the subscriber
         self.sub = rospy.Subscriber(camera_topic, Image, self.callback)
         print("Subscribers Initialized")
 
-        self.init_complete = True
-        print("YOLO Model Initialized")
+        print("Object Detection Node Initialized")
 
     def callback2(self, data):
         # Callback function for the arm status subscriber
@@ -135,6 +126,10 @@ class ObjectDetection:
             # Convert the image to RGB format
             # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
 
+            # Display the image
+            cv2.imshow("ROI_Image", cv_image)
+            cv2.waitKey(1)
+
             # Call a function to detect the objects
             self.detect_objects(cv_image)
 
@@ -156,7 +151,7 @@ class ObjectDetection:
         bounding_boxes_data = results[0].boxes.data
 
         # Convert the bounding box data to a pandas DataFrame and cast to float
-        bounding_boxes_df = pd.DataFrame(bounding_boxes_data).astype("float")
+        bounding_boxes_df = pd.DataFrame(bounding_boxes_data.cpu()).astype("float")
 
         # Initialize variables to store the largest bounding box and its area
         largest_bounding_box = None
@@ -212,7 +207,7 @@ class ObjectDetection:
                 time.sleep(2)
 
         # Display the image with the bounding box and label
-        cv2.imshow("Image", img)
+        cv2.imshow("Image_YOLO", img)
         cv2.waitKey(1)
 
 
