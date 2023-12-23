@@ -76,22 +76,43 @@ class ObjectDetection:
         # Enable handshaking
         print("Handshaking with the Arm")
         self.pub.publish("Handshake Message")
+        time.sleep(4)
+        print("Handshake Delay Complete")
 
-        # Define the subscriber
-        self.sub = rospy.Subscriber(camera_topic, Image, self.callback)
+        self.init_complete = True
+        print("Initialization Complete so setting Init Complete as TRUE")
+
+        print("Connecting to the Arm")
+        self.pub.publish("Connect Arm")
+        time.sleep(4)
+        print("Connection Delay Complete")
 
         # Define the YOLO model
         self.model = YOLO(model_path)
+
+        print("Object Detection Node Initialized")
+        time.sleep(2)
+
+        # Define the subscriber
+        self.sub = rospy.Subscriber(camera_topic, Image, self.callback)
+        print("Subscribers Initialized")
 
         self.init_complete = True
         print("YOLO Model Initialized")
 
     def callback2(self, data):
         # Callback function for the arm status subscriber
+        if not self.init_complete:
+            print("Waiting for Initialization to Complete")
+            return
+        print("Recieved Arm Status as {}".format(data.data))
+
         if data.data == "Ready":
             self.ready = True
+            print("Set Arm Ready as TRUE")
         else:
             self.ready = False
+            print("Set Arm Ready as FALSE")
 
     def callback(self, data):
         # Callback function for the camera subscriber
