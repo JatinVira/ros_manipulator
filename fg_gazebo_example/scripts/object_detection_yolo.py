@@ -32,7 +32,6 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 model_path = os.path.join(script_dir, "cubes2.pt")
 
 # Global variables
-# model_path = "Cubes_best.pt"
 camera_topic = "/camera/image"
 region_of_interest = (20, 104, 168, 191)
 confidence_threshold = 0.8
@@ -123,9 +122,6 @@ class ObjectDetection:
                 self.roi[0] : self.roi[0] + self.roi[2],
             ]
 
-            # Convert the image to RGB format
-            # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
-
             # Display the image
             cv2.imshow("ROI_Image", cv_image)
             cv2.waitKey(1)
@@ -198,9 +194,19 @@ class ObjectDetection:
                 2,
             )
 
-            # Publish the color
-            if self.ready and self.init_complete:
-                print("Done Processing Image so setting Arm Ready as False")
+            # Publish the color if label has color like Red, Blue, Green, Yellow
+            if (
+                self.ready
+                and self.init_complete
+                and label
+                in [
+                    "Red",
+                    "Blue",
+                    "Green",
+                    "Yellow",
+                ]
+            ):
+                print("Done Processing Valid Image so setting Arm Ready as False")
                 self.ready = False
                 print("Sending Color to Arm as {}".format(label))
                 self.pub.publish(label)
