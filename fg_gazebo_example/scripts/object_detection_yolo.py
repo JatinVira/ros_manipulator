@@ -123,7 +123,7 @@ class ObjectDetection:
             ]
 
             # Display the image
-            cv2.imshow("ROI_Image", cv_image)
+            cv2.imshow("ROI_Feed", cv_image)
             cv2.waitKey(1)
 
             # Call a function to detect the objects
@@ -213,7 +213,7 @@ class ObjectDetection:
                 time.sleep(2)
 
         # Display the image with the bounding box and label
-        cv2.imshow("Image_YOLO", img)
+        cv2.imshow("Object_detection_feed", img)
         cv2.waitKey(1)
 
 
