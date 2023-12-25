@@ -153,19 +153,6 @@ void move_servos(int servo_angles[]) {
     servo_6.write(servo_angles[5]);
     delay(DELAY_BW_SERVOS);
   }
-  // // Move each servo to its respective angle
-  // servo_1.write(servo_angles[0]);
-  // delay(DELAY_BW_SERVOS);
-  // servo_2.write(servo_angles[1]);
-  // delay(DELAY_BW_SERVOS);
-  // servo_3.write(servo_angles[2]);
-  // delay(DELAY_BW_SERVOS);
-  // servo_4.write(servo_angles[3]);
-  // delay(DELAY_BW_SERVOS);
-  // servo_5.write(servo_angles[4]);
-  // delay(DELAY_BW_SERVOS);
-  // servo_6.write(servo_angles[5]);
-  // delay(DELAY_BW_SERVOS);
 }
 
 // position sequence for the color blue
@@ -229,29 +216,55 @@ void pos_seq_for_green() {
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Pickup Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Gripper Close";
+  publish_status(msg_to_send);
+  delay(1000);
+
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the drop position
   move_servos(green_drop_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Drop Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the default position
   move_servos(default_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Default Pos";
+  publish_status(msg_to_send);
+  delay(1000);
+
+  msg_to_send.data = "FN Complete";
+  publish_status(msg_to_send);
+  delay(1000);
 }
 
 // position sequence for the color yellow
@@ -259,30 +272,55 @@ void pos_seq_for_yellow() {
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Pickup Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Gripper Close";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the drop position
   move_servos(yellow_drop_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Drop Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the default position
   move_servos(default_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Default Pos";
+  publish_status(msg_to_send);
+  delay(1000);
+
+  msg_to_send.data = "FN Complete";
+  publish_status(msg_to_send);
+  delay(1000);
 }
 
 // position sequence for the color red
@@ -290,30 +328,55 @@ void pos_seq_for_red() {
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the pickup position
   move_servos(pickup_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Pickup Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Close the gripper
   move_gripper(GRIPPER_CLOSE);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Gripper Close";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the drop position
   move_servos(red_drop_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Drop Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Interm Pos";
+  publish_status(msg_to_send);
+  delay(1000);
 
   // Move the arm to the default position
   move_servos(default_position);
   delay(DELAY_BW_POSE_SEQ);
+  msg_to_send.data = "Default Pos";
+  publish_status(msg_to_send);
+  delay(1000);
+
+  msg_to_send.data = "FN Complete";
+  publish_status(msg_to_send);
+  delay(1000);
 }
 
 // function to pass the color as argument, and depending on the color,
