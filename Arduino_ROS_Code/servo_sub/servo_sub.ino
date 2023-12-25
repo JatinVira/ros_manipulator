@@ -7,7 +7,7 @@
 // 2. When a message is received, check the color and move the servo accordingly
 // 3. There are a total of 6 Servo Motors, All of them move to move the arm to
 // the desired position
-// 4. There are a total of 4 colors, Blue, Green, Yellow and Pink
+// 4. There are a total of 4 colors, Blue, Green, Yellow and Red
 // 5. The Arm will have a common fixed pickup position for all the colors
 // 6. The Arm will have 4 different drop positions for each color
 // 7. The Arm will have all the 6 joint angles fixed for each drop position and
@@ -78,7 +78,7 @@ int green_drop_position[NUM_SERVOS] = {66,  100, 145,
                                        168, 90,  GRIPPER_OPEN_ANGLE};
 int yellow_drop_position[NUM_SERVOS] = {48,  105, 148,
                                         144, 90,  GRIPPER_OPEN_ANGLE};
-int pink_drop_position[NUM_SERVOS] = {48, 97, 147, 176, 90, GRIPPER_OPEN_ANGLE};
+int red_drop_position[NUM_SERVOS] = {48, 97, 147, 176, 90, GRIPPER_OPEN_ANGLE};
 
 // Create a Node Handle
 ros::NodeHandle nh;
@@ -286,8 +286,8 @@ void pos_seq_for_yellow() {
   delay(DELAY_BW_POSE_SEQ);
 }
 
-// position sequence for the color pink
-void pos_seq_for_pink() {
+// position sequence for the color red
+void pos_seq_for_red() {
   // Move the arm to the intermediate position
   move_servos(intermediate_position);
   delay(DELAY_BW_POSE_SEQ);
@@ -305,7 +305,7 @@ void pos_seq_for_pink() {
   delay(DELAY_BW_POSE_SEQ);
 
   // Move the arm to the drop position
-  move_servos(pink_drop_position);
+  move_servos(red_drop_position);
   delay(DELAY_BW_POSE_SEQ);
 
   // Move the arm to the intermediate position
@@ -347,11 +347,11 @@ void move_arm(String color) {
     publish_status(msg_to_send);
     delay(1000);
     return;
-  } else if (color == "Pink") {
-    msg_to_send.data = "Pink Received";
+  } else if (color == "Red") {
+    msg_to_send.data = "Red Received";
     publish_status(msg_to_send);
     delay(1000);
-    pos_seq_for_pink();
+    pos_seq_for_red();
     msg_to_send.data = "Ready";
     publish_status(msg_to_send);
     delay(1000);
@@ -414,8 +414,8 @@ void test_arm() {
   // Test the drop position for yellow
   move_servos(yellow_drop_position);
 
-  // Test the drop position for pink
-  move_servos(pink_drop_position);
+  // Test the drop position for red
+  move_servos(red_drop_position);
 }
 
 // Setup Function
