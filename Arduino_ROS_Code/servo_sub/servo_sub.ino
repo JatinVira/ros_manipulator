@@ -1,6 +1,5 @@
 // A Arduino sketch to setup a simple subscriber over ROS Serial to control a
 // servo
-// Author: Jatin Vira
 
 // Logic:
 // 1. Setup a subscriber to listen to the topic "box_color"
